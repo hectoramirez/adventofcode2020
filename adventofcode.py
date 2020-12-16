@@ -189,7 +189,7 @@ p = 0
 for group in groups:
     people = group.replace("\n", "")
     p += len(list(set(people)))
-print(p)
+# print(p)
 
 y = 0
 for group in groups:
@@ -199,4 +199,54 @@ for group in groups:
     for let in letters:
         if all_g.count(let) == people_n:
             y += 1
-print(y)
+# print(y)
+
+
+# +++++++++++++++++++++++++++ #
+# Day 7: Handy Haversacks     #
+# +++++++++++++++++++++++++++ #
+
+data = open('data/day7.txt', 'r')
+data = data.read()
+rules = data.split('\n')
+
+colors = []
+for rule in rules:
+    rule_s = rule.split(' ')
+    first, second = rule_s[0], rule_s[1]
+    code = first + ' ' + second
+    colors.append(code)
+
+codes = []
+for rule in rules:
+    if ('shiny gold' in rule) and not rule.startswith('shiny gold'):
+        rule_s = rule.split(' ')
+        first, second = rule_s[0], rule_s[1]
+        code = first + ' ' + second
+        codes.append(code)
+        rules.remove(rule)
+
+codes_m = []
+while len(rules) > 0:
+    codes_2 = []
+
+    if len(codes_2) == 0:
+        ls = codes
+    else:
+        ls = codes_2
+
+    for code in ls:
+        for rule in rules:
+            if (code in rule) and not rule.startswith(code):
+                rule_s = rule.split(' ')
+                first, second = rule_s[0], rule_s[1]
+                code = first + ' ' + second
+                codes_2.append(code)
+                codes_m.append(code)
+                print(codes_2)
+                try:
+                    rules.remove(rule)
+                except:
+                    pass
+
+                print(len(rules))
